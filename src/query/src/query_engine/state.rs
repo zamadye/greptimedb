@@ -61,6 +61,7 @@ use crate::metrics::{QUERY_MEMORY_POOL_REJECTED_TOTAL, QUERY_MEMORY_POOL_USAGE_B
 use crate::optimizer::ExtensionAnalyzerRule;
 use crate::optimizer::constant_term::MatchesConstantTermOptimizer;
 use crate::optimizer::count_wildcard::CountWildcardToTimeIndexRule;
+use crate::optimizer::json2_scan_hint::Json2ScanHintRule;
 use crate::optimizer::parallelize_scan::ParallelizeScan;
 use crate::optimizer::pass_distribution::PassDistribution;
 use crate::optimizer::remove_duplicate::RemoveDuplicate;
@@ -171,6 +172,7 @@ impl QueryEngineState {
         analyzer.rules.push(Arc::new(FixStateUdafOrderingAnalyzer));
 
         let mut optimizer = Optimizer::new();
+        optimizer.rules.push(Arc::new(Json2ScanHintRule));
         optimizer.rules.push(Arc::new(ScanHintRule));
 
         // add physical optimizer

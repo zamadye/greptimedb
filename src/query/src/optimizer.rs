@@ -14,6 +14,7 @@
 
 pub mod constant_term;
 pub mod count_wildcard;
+pub mod json2_scan_hint;
 pub mod parallelize_scan;
 pub mod pass_distribution;
 pub mod remove_duplicate;
